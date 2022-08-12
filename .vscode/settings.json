@@ -1,7 +1,29 @@
 {
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "node_modules": true,
+        "build": true,
+        "coverage": true,
+        "**/*.css": true,
+        "package-lock.json": true
+    },
+    "files.trimTrailingWhitespace": true,
     "workbench.colorCustomizations": {
-        "activityBar.background": "#3b300c",
-        "titleBar.activeBackground": "#857131",
-        "titleBar.activeForeground": "#FEFCFE"
+        "activityBar.background": "#9c2828",
+        "activityBar.foreground": "#fff",
+        "activityBar.activeFocusBorder": "#b81717",
+        "activityBar.activeBackground": "#840000",
+        "activityBar.activeBorder": "#b81717",
+        "activityBar.dropBorder": "#b81717",
+        "activityBar.border": "#b81717",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "titleBar.activeBackground": "#9c2828",
+        "titleBar.activeForeground": "#fff",
+        "titleBar.inactiveBackground": "#9c282899",
+        "titleBar.inactiveForeground": "#fff",
+        "statusBar.background": "#9c2828",
+        "statusBarItem.hoverBackground": "#b81717",
+        "statusBar.foreground": "#fff"
     }
 }
