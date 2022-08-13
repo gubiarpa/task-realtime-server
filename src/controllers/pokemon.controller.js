@@ -1,6 +1,6 @@
-const { request, response } = require('express');
+import { request, response } from "express";
 
-const getRandomPokemon = async (req = request, res = response) => {
+export const getRandomPokemon = async (req = request, res = response) => {
 
     try {
         res.json({
@@ -12,8 +12,4 @@ const getRandomPokemon = async (req = request, res = response) => {
         console.error(error);
         res.status(400).send('Something broke!');
     }
-}
-
-module.exports = {
-    getRandomPokemon,
 }

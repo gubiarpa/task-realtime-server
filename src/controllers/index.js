@@ -1,5 +1,3 @@
-const pokemon = require("./pokemon.controller");
+import { getRandomPokemon } from "./pokemon.controller.js";
 
-module.exports = {
-    ...pokemon
-}
+export { getRandomPokemon };
