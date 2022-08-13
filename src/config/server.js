@@ -5,6 +5,8 @@ import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
 
+import { pokemon } from "../routes/index.js";
+
 dotenv.config();
 
 export class Server {
@@ -14,7 +16,7 @@ export class Server {
         this.app = express();
         this.server = http.createServer(this.app);
         console.log("Llegó hasta aquí al menos");
-        this.#sockets();
+        // this.#sockets();
         this.port = process.env.PORT;
         this.pathList = {
             pokemon: "/api/pokemon"
@@ -23,7 +25,12 @@ export class Server {
         /* Methods */
         this.#middlewares();
         this.#routes();
-        this.#sockets();
+        // this.io = new SocketServer(this.server, {
+        //     cors: {
+        //         origin: "http://127.0.0.1:2907"
+        //     }
+        // });
+        // this.#sockets();
     }
 
     #middlewares() {
@@ -33,23 +40,16 @@ export class Server {
     }
 
     #routes() {
-        this.app.use(this.pathList.pokemon, require("../routes").pokemon);
+        this.app.use(this.pathList.pokemon, pokemon);
     }
 
-    #sockets() {
-        this.io = new SocketServer(this.server, {
-            cors: {
-                origin: "http://127.0.0.1:2907"
-            }
-        });
-        this.io("connection", (socket) => {
-            console.log(`A user connected with id: ${socket.id}`);
-        });
-    }
+    // #sockets() {
+    //     this.io("connection", (socket) => {
+    //         console.log(`A user connected with id: ${socket.id}`);
+    //     });
+    // }
 
     listen() {
-
-        this.#sockets();
 
         this.app.listen(this.port, () => {
             console.log(`Server is running on port ${this.port}`);
@@ -57,5 +57,3 @@ export class Server {
 
     }
 }
-
-// module.exports = Server;

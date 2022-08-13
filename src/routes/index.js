@@ -1,5 +1,3 @@
-const pokemon = require("./pokemon.route");
+import { router as pokemon } from "./pokemon.route.js";
 
-module.exports = {
-    pokemon
-}
+export { pokemon };

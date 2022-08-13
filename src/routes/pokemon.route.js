@@ -1,10 +1,9 @@
-const { Router } = require("express");
-const {
-    getRandomPokemon
-} = require("../controllers");
+import { Router } from "express";
+
+import { getRandomPokemon } from "../controllers/index.js";
 
 const router = Router();
 
 router.get("/", getRandomPokemon);
 
-module.exports = router;
+export { router };
