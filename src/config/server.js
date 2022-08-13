@@ -15,8 +15,11 @@ export class Server {
         /* Properties */
         this.app = express();
         this.server = http.createServer(this.app);
-        console.log("Llegó hasta aquí al menos");
-        // this.#sockets();
+        this.io = new SocketServer(this.server, {
+            cors: {
+                origin: "http://127.0.0.1:2907"
+            }
+        });
         this.port = process.env.PORT;
         this.pathList = {
             pokemon: "/api/pokemon"
@@ -25,17 +28,13 @@ export class Server {
         /* Methods */
         this.#middlewares();
         this.#routes();
-        // this.io = new SocketServer(this.server, {
-        //     cors: {
-        //         origin: "http://127.0.0.1:2907"
-        //     }
-        // });
-        // this.#sockets();
+        this.#sockets();
     }
 
     #middlewares() {
         this.app.use(cors());
         this.app.use(morgan("dev"));
+        this.app.use(express.urlencoded({ extended: false }));
         this.app.use(express.json());
     }
 
@@ -43,11 +42,11 @@ export class Server {
         this.app.use(this.pathList.pokemon, pokemon);
     }
 
-    // #sockets() {
-    //     this.io("connection", (socket) => {
-    //         console.log(`A user connected with id: ${socket.id}`);
-    //     });
-    // }
+    #sockets() {
+        this.io.on("connection", (socket) => {
+            console.log(socket.id);
+        });
+    }
 
     listen() {
 
