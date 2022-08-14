@@ -1,15 +1,22 @@
 import { request, response } from "express";
+import { endpoint } from "../config/endpoint.js";
+import axios from "axios";
 
 export const getRandomPokemon = async (req = request, res = response) => {
 
     try {
-        res.json({
-            id: 47707540,
-            name: "Charmander"
+
+        const path = `${endpoint.pokemonUrl}/pokemon?offset=0&limit=151`;
+        const { data } = await axios({
+            method: "get",
+            url: path
         });
+
+        const {results} = data;
+
+        res.json(results);
+
     } catch (error) {
-        console.error('Can not get list of entities');
-        console.error(error);
-        res.status(400).send('Something broke!');
+        res.status(400).send(error);
     }
 }
